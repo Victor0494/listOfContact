@@ -1,0 +1,42 @@
+.container-contact  {
+    margin: 10px 10px;
+}
+
+.contato {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.contato ul li {
+    list-style: none;
+    font-size: 18px;
+    line-height: 150%;
+    width: 20%;
+    margin: 2px 0;
+}
+
+.contato ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1; 
+}
+
+.contato ul li {
+    width: auto;
+}
+
+.contato button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.container-contact {
+    margin: 100px; /* Diminui o espaçamento geral do container */
+}

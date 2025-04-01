@@ -1,0 +1,14 @@
+{
+  "contatos": [
+    {
+      "id": "c4a95ea4-0d30-4496-b4e6-48f323c01fb6",
+      "nome": "teste",
+      "telefone": "342342"
+    },
+    {
+      "id": "456fb798-2527-4f5e-a9bc-6d3015b85b03",
+      "nome": "Victor",
+      "telefone": "54999381091"
+    }
+  ]
+}

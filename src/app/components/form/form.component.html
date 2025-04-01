@@ -1,0 +1,22 @@
+<div class="btn-add">
+    <button (click)="abrirModal()">Adicionar
+        <span class="material-icons-outlined md-40">person_add</span>
+    </button>
+</div>
+
+@if (mostrarModal) {
+<div class="modal">
+    <div class="modal-content">
+        <h2>Adicionar Usuário</h2>
+
+        <form [formGroup]="formulario" (ngSubmit)="cadastrarUsuario()">
+            <input type="text" formControlName="nome" placeholder="Nome">
+            <input type="text" formControlName="telefone" placeholder="Telefone">
+            <div class="botoes">
+                <button type="submit">Salvar</button>
+                <button type="button" (click)="fecharModal()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

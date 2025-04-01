@@ -1,0 +1,20 @@
+<div class="container-contact">
+    @for (contact of contatos; track contact.id) {
+
+    <section class="contato">
+        <ul>
+            <div>
+                <li class="contact-name">
+                    <strong>{{ contact.nome }}</strong>
+                </li>
+                <li>
+                    {{ contact.telefone }}
+                </li>
+            </div>
+            <button class="delete-btn" (click)="excluirContato(contact.id)">
+                <span class="material-icons">delete</span>
+            </button>
+        </ul>
+    </section>
+    }
+</div>
