@@ -1,6 +1,5 @@
 <div class="container-contact">
     @for (contact of contatos; track contact.id) {
-
     <section class="contato">
         <ul>
             <div>
@@ -11,10 +10,28 @@
                     {{ contact.telefone }}
                 </li>
             </div>
-            <button class="delete-btn" (click)="excluirContato(contact.id)">
-                <span class="material-icons">delete</span>
+            <button class="edit-btn" (click)="abrirEditModal(contact)">
+                <span class="material-icons-outlined">edit </span>
             </button>
         </ul>
     </section>
+    @if (editModal) {
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Editar Usuário</h2>
+            <form [formGroup]="formulario" (ngSubmit)="editarContato()">
+                <input type="text" formControlName="nome" [placeholder]=editContact.nome>
+                <input type="text" formControlName="telefone" [placeholder]=editContact.telefone>
+                <div class="botoes">
+                    <button type="submit">Salvar</button>
+                    <button class="edit-btn" (click)="excluirContato()">
+                        <span class="material-icons-outlined">delete</span>
+                    </button>
+                    <button type="button" (click)="fecharEditModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    }
     }
 </div>

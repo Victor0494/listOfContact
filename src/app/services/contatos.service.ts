@@ -33,11 +33,21 @@ export class ContatosService {
 
   excluirContato(id: String): Observable<Contact> {
     const url = `${this.API}/${id}`;
-    
     return new Observable(observer => {
       this.http.delete<Contact>(url).subscribe(contatoExcluido => {
         this.obterContatos();
         observer.next(contatoExcluido);
+        observer.complete();
+      });
+    });
+  }
+
+  editarContato(contato: Contact): Observable<Contact> {
+    console.log(contato)
+    return new Observable(observer => {
+      this.http.put<Contact>(`${this.API}/${contato.id}`, contato).subscribe(novoContato => {
+        this.obterContatos();
+        observer.next(novoContato);
         observer.complete();
       });
     });

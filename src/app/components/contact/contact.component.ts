@@ -6,13 +6,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
 export class ContactComponent implements OnInit{
 
   contatos: Contact [] = [];
+  editModal = false;
+  editContact!: Contact;
+  formulario!: FormGroup;
 
   constructor(private contactService: ContatosService) {
 
@@ -23,10 +26,42 @@ export class ContactComponent implements OnInit{
       this.contatos = listaContatos;
     });
 
+    this.formulario = new FormGroup({
+          nome: new FormControl(''),
+          telefone: new FormControl('')
+        });
+
     this.contactService.obterContatos();
   }
 
-  excluirContato(id: String) {
-    this.contactService.excluirContato(id).subscribe();
+  excluirContato() {
+    this.contactService.excluirContato(this.editContact.id).subscribe();
+    this.fecharEditModal();
+  }
+
+
+  editarContato() {
+    const contato: Contact = {
+      id: this.editContact.id,
+      nome: this.formulario.value.nome ? this.formulario.value.nome : this.editContact.nome,
+      telefone: this.formulario.value.telefone ? this.formulario.value.telefone : this.editContact.telefone
+    };
+     this.contactService.editarContato(contato).subscribe(() => {
+       this.formulario.reset();
+       this.fecharEditModal();
+     });
+  }
+
+  gerarId(): string {
+    return crypto.randomUUID();
+  }
+
+  abrirEditModal(contact: Contact) {
+    this.editContact = contact;
+    this.editModal = true;
+  }
+
+  fecharEditModal() {
+    this.editModal = false;
   }
 }

@@ -18,7 +18,6 @@ export class FormComponent implements OnInit{
 
   mostrarModal = false;
 
-
   constructor(private contatoService: ContatosService, private contactService: ContatosService) {
 
   }
