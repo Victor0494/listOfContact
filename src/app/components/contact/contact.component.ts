@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from './contact';
 import { ContatosService } from '../../services/contatos.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ContainerComponent } from "../container/container.component";
+import { FormComponent } from "../form/form.component";
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ContainerComponent, FormComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
