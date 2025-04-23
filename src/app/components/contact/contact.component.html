@@ -7,10 +7,10 @@
         <ul>
             <div>
                 <li class="contact-name">
-                    <strong>{{ contact.nome }}</strong>
+                    <strong>{{ contact.name }}</strong>
                 </li>
                 <li>
-                    {{ contact.telefone }}
+                    {{ contact.phone }}
                 </li>
             </div>
             <button class="edit-btn" (click)="abrirEditModal(contact)">
@@ -23,8 +23,8 @@
         <div class="modal-content">
             <h2>Editar Usuário</h2>
             <form [formGroup]="formulario" (ngSubmit)="editarContato()">
-                <input type="text" formControlName="nome" [placeholder]=editContact.nome>
-                <input type="text" formControlName="telefone" [placeholder]=editContact.telefone>
+                <input type="text" formControlName="nome" [placeholder]=editContact.name>
+                <input type="text" formControlName="telefone" [placeholder]=editContact.phone>
                 <div class="botoes">
                     <button type="submit">Salvar</button>
                     <button class="edit-btn" (click)="excluirContato()">

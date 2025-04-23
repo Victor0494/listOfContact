@@ -31,8 +31,8 @@ export class FormComponent implements OnInit{
   cadastrarUsuario() {
     const contato: Contact = {
       id: this.gerarId(),
-      nome: this.formulario.value.nome,
-      telefone: this.formulario.value.telefone
+      name: this.formulario.value.nome,
+      phone: this.formulario.value.telefone
     };
   
     this.contatoService.criarContato(contato).subscribe(() => {

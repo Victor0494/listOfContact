@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contact } from '../components/contact/contact';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ContatosService {
 
-  private readonly API = 'http://localhost:3000/contatos';
+  private readonly API = 'http://localhost:8080/v1/contact';
 
   private contatosSubject = new BehaviorSubject<Contact[]>([]);
   contatos$ = this.contatosSubject.asObservable(); 
@@ -16,14 +16,20 @@ export class ContatosService {
   constructor(private http: HttpClient) { }
 
   obterContatos(): void {
-    this.http.get<Contact[]>(this.API).subscribe(contatos => {
+    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http.get<Contact[]>(this.API, {headers}).subscribe(contatos => {
       this.contatosSubject.next(contatos);
     });
   }
 
   criarContato(contato: Contact): Observable<Contact> {
+    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
     return new Observable(observer => {
-      this.http.post<Contact>(this.API, contato).subscribe(novoContato => {
+      this.http.post<Contact>(this.API, contato, {headers}).subscribe(novoContato => {
         this.obterContatos();
         observer.next(novoContato);
         observer.complete();
@@ -32,9 +38,12 @@ export class ContatosService {
   }
 
   excluirContato(id: String): Observable<Contact> {
+    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
     const url = `${this.API}/${id}`;
     return new Observable(observer => {
-      this.http.delete<Contact>(url).subscribe(contatoExcluido => {
+      this.http.delete<Contact>(url, {headers}).subscribe(contatoExcluido => {
         this.obterContatos();
         observer.next(contatoExcluido);
         observer.complete();

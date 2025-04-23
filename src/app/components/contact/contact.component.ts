@@ -45,8 +45,8 @@ export class ContactComponent implements OnInit{
   editarContato() {
     const contato: Contact = {
       id: this.editContact.id,
-      nome: this.formulario.value.nome ? this.formulario.value.nome : this.editContact.nome,
-      telefone: this.formulario.value.telefone ? this.formulario.value.telefone : this.editContact.telefone
+      name: this.formulario.value.nome ? this.formulario.value.nome : this.editContact.name,
+      phone: this.formulario.value.telefone ? this.formulario.value.telefone : this.editContact.phone
     };
      this.contactService.editarContato(contato).subscribe(() => {
        this.formulario.reset();
