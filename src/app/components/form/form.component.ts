@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from '../contact/contact';
 import { ContatosService } from '../../services/contatos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +19,8 @@ export class FormComponent implements OnInit{
 
   mostrarModal = false;
 
-  constructor(private contatoService: ContatosService, private contactService: ContatosService) {
+  constructor(private contatoService: ContatosService, private contactService: ContatosService,
+    private router: Router) {
 
   }
   ngOnInit(): void {
@@ -39,6 +41,11 @@ export class FormComponent implements OnInit{
       this.formulario.reset();
       this.fecharModal();
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
   
   gerarId(): string {

@@ -9,6 +9,11 @@
   z-index: 999;
 }
 
+.btn-add {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn-add button {
   display: flex;
   gap: 10px;

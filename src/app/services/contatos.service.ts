@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contact } from '../components/contact/contact';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContatosService {
 
-  private readonly API = 'http://localhost:8080/v1/contact';
+  private readonly API = `${environment.API_URL}/v1/contact`;
 
   private contatosSubject = new BehaviorSubject<Contact[]>([]);
   contatos$ = this.contatosSubject.asObservable(); 
@@ -16,7 +17,7 @@ export class ContatosService {
   constructor(private http: HttpClient) { }
 
   obterContatos(): void {
-    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     this.http.get<Contact[]>(this.API, {headers}).subscribe(contatos => {
@@ -25,7 +26,7 @@ export class ContatosService {
   }
 
   criarContato(contato: Contact): Observable<Contact> {
-    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return new Observable(observer => {
@@ -38,7 +39,7 @@ export class ContatosService {
   }
 
   excluirContato(id: String): Observable<Contact> {
-    const token = localStorage.getItem('token'); // ou de onde você estiver guardando o token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     const url = `${this.API}/${id}`;
@@ -52,9 +53,10 @@ export class ContatosService {
   }
 
   editarContato(contato: Contact): Observable<Contact> {
-    console.log(contato)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return new Observable(observer => {
-      this.http.put<Contact>(`${this.API}/${contato.id}`, contato).subscribe(novoContato => {
+      this.http.put<Contact>(`${this.API}/${contato.id}`, contato, {headers}).subscribe(novoContato => {
         this.obterContatos();
         observer.next(novoContato);
         observer.complete();

@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { loginInfoRequest } from '../../components/login/loginInfoRequest';
 import { loginInfoResponse } from '../../components/login/loginInfoResponse';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private readonly API = 'http://localhost:8080/login'
+    private readonly API = `${environment.API_URL}/login`;
+  
 
   constructor(private http: HttpClient) { }
 
